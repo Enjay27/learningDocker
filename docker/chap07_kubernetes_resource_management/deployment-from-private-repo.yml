@@ -1,0 +1,21 @@
+  
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-from-prvate-repo
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      name: mypod
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: wordpress-mysql
+        image: mysql:lastes
+        args: ['tail', '-f', '/dev/null']
+      imagePullSecrets:
+      - name: registry-auth-registry
